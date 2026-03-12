@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lachfang – Lustige Karten aus der Schweiz</title>
+  <meta name="description" content="Lachfang – freche, liebevoll gestaltete Karten aus der Schweiz.">
+	<link rel="stylesheet" href="style.css">
+</head>
+
 <header class="header">
     <h1>Lachfang</h1>
     <div class="tagline">Your subtitle goes here</div>
@@ -5,3 +15,116 @@
 <div class="container">
     <!-- existing content starts here -->
 </div>
+
+<body>
+  <div class="container">
+    <h1>Lachfang</h1>
+    <p class="tagline">
+      Ein bisschen lustige Designs
+    </p>
+
+    <div class="section">
+      <p>
+        <strong>Lachfang</strong> ist ein Kartenprojekt aus der Schweiz.
+        Wir gestalten etwas humorvolle, manchmal selbst-ironische, manchmal herzige Karten
+        für Geburtstage, Alltag und all die kleinen Momente, in denen man
+        jemandem ein Lächeln schenken will.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>Was wir machen</h2>
+      <div class="cards">
+        <div class="card">
+          <strong>Postkarten</strong>
+          Lustige Illustrationen und Texte für Geburtstage und Alltag.
+        </div>
+        <div class="card">
+          <strong>Schweizer Humor</strong>
+          Wortspiele, Insider und typische Schweizer Motive.
+        </div>
+        <div class="card">
+          <strong>Minimalistisches Design</strong>
+          Klar, reduziert und auf das Wesentliche fokussiert.
+        </div>
+      </div>
+    </div>
+
+    <section id="portfolio">
+	  <h2>Portfolio</h2>
+
+	  <div class="series">
+		<h3>Serie 01 — Unnötige Karten</h3>
+		<div class="grid">
+		  	<img src="images/Animals/Pingu.png" alt="LACHFANG Penguin">
+		</div>
+	  </div>
+
+	  <div class="series">
+		<h3>Serie 02 — Fragwürdige Botschaften</h3>
+		<!-- images -->
+	  </div>
+
+	  <div class="series">
+		<h3>Serie 03 — Karten mit Nebenwirkungen</h3>
+		<!-- images -->
+	  </div>
+
+	  <div class="series">
+		<h3>Serie 04 — Experimentelle Freundlichkeiten</h3>
+		<!-- images -->
+	  </div>
+
+	</section>
+
+
+    <div class="section">
+      <h2>Kontakt</h2>
+      <p>
+        Interesse, Feedback oder Zusammenarbeit?<br>
+        Schreib uns gerne:
+        <span id="email"></span><br>
+		<a href="https://www.instagram.com/lachfang/"
+		   target="_blank"
+		   rel="noopener"
+		   style="display:inline-flex; align-items:center; gap:0.4rem;">
+
+		  <!-- Instagram icon (inline SVG) -->
+		  <svg xmlns="http://www.w3.org/2000/svg"
+			   width="18" height="18" viewBox="0 0 24 24"
+			   fill="none" stroke="currentColor" stroke-width="2"
+			   stroke-linecap="round" stroke-linejoin="round"
+			   aria-hidden="true">
+			<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+			<path d="M16 11.37A4 4 0 1 1 12.63 8
+					 4 4 0 0 1 16 11.37z"></path>
+			<line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+		  </svg>
+
+		  <span>@lachfang</span>
+		</a>
+
+      </p>
+    </div>
+
+    <footer>
+      © Lachfang · Schweiz
+    </footer>
+  </div>
+
+  <!-- Email obfuscation (runs AFTER the element exists) -->
+  <script>
+    (function () {
+      const user = "hello";
+      const domain = "lachfang.ch";
+      const el = document.getElementById("email");
+      if (el) {
+        el.innerHTML =
+          '<a href="mailto:' + user + '@' + domain + '">' +
+          user + '@' + domain +
+          '</a>';
+      }
+    })();
+  </script>
+</body>
+</html>
