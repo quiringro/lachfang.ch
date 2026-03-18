@@ -144,6 +144,7 @@
 .header h1 {
   color: white;
   margin: 0;
+  align-items: center;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
 }
@@ -151,6 +152,9 @@
 .header-subtitle {
   color: white;
   margin: 0;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
 }
 
 
