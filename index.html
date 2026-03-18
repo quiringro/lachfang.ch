@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lachfang – Lustige Karten aus der Schweiz</title>
   <meta name="description" content="Lachfang – freche, liebevoll gestaltete Karten aus der Schweiz.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="style.css">
 </head>
 
@@ -129,12 +132,56 @@
       const user = "hello";
       const domain = "lachfang.ch";
       const el = document.getElementById("email");
+      const cards = document.querySelectorAll(".card img");
+      let activeOverlay = null;
+
       if (el) {
         el.innerHTML =
           '<a href="mailto:' + user + '@' + domain + '">' +
           user + '@' + domain +
           '</a>';
       }
+
+      function closeOverlay() {
+        if (!activeOverlay) {
+          return;
+        }
+
+        document.body.classList.remove("image-zoom-open");
+        activeOverlay.remove();
+        activeOverlay = null;
+      }
+
+      cards.forEach((cardImage) => {
+        cardImage.addEventListener("click", () => {
+          closeOverlay();
+
+          const overlay = document.createElement("div");
+          overlay.className = "image-overlay";
+
+          const zoomedImage = document.createElement("img");
+          zoomedImage.src = cardImage.src;
+          zoomedImage.alt = cardImage.alt;
+          zoomedImage.className = "image-overlay__img";
+
+          overlay.appendChild(zoomedImage);
+          overlay.addEventListener("click", (event) => {
+            if (event.target === overlay) {
+              closeOverlay();
+            }
+          });
+
+          document.body.appendChild(overlay);
+          document.body.classList.add("image-zoom-open");
+          activeOverlay = overlay;
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeOverlay();
+        }
+      });
     })();
   </script>
 </body>
