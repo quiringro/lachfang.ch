@@ -48,7 +48,7 @@
     }
 
     .card img {
-      width: min(100%, 180px);
+      width: max(100%, 120px);
       height: auto;
       display: block;
       margin-bottom: 0.75rem;
