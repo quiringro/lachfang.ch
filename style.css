@@ -136,6 +136,7 @@
   background-color: #1e3a8a;
   padding: 20px;
   width: 100%;
+  align-items: center;
   position: relative;
   margin-bottom: 20px;
 }
