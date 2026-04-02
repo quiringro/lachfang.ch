@@ -137,8 +137,12 @@
   <!-- Email obfuscation (runs AFTER the element exists) -->
   <script>
     (function () {
-      const user = "hello";
-      const domain = "lachfang.ch";
+      const emailParts = [
+        [104, 101, 108, 108, 111],
+        [108, 97, 99, 104, 102, 97, 110, 103, 46, 99, 104]
+      ].map((part) => part.map((code) => String.fromCharCode(code)).join(""));
+      const user = emailParts[0];
+      const domain = emailParts[1];
       const el = document.getElementById("email");
       const cards = document.querySelectorAll(".card img");
       let activeOverlay = null;
