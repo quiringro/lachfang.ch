@@ -164,6 +164,26 @@
   font-weight: 400;
 }
 
+.header-tabs {
+  margin-top: 0.85rem;
+  display: flex;
+  gap: 1.1rem;
+}
+
+.header-tabs a {
+  color: white;
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  display: inline-block;
+  transition: transform 0.2s ease, text-decoration-color 0.2s ease;
+  transform-origin: center;
+}
+
+.header-tabs a:hover {
+  text-decoration: underline;
+  transform: scale(1.1);
+}
+
 
 .image-zoom-open {
   overflow: hidden;
