@@ -28,8 +28,17 @@
       <h2>schriib euis</h2>
       <p>
         Hesch e Fro, es Feedback oder e Idee?
-        Schriib euis gern uf <a href="mailto:hello@lachfang.ch">hello@lachfang.ch</a>.
+        Schriib euis gern uf <span id="contact-email"></span>.
       </p>
+      <script>
+        const user = "hello";
+        const domain = "lachfang.ch";
+        const email = `${user}@${domain}`;
+        const emailLink = document.createElement("a");
+        emailLink.href = `mailto:${email}`;
+        emailLink.textContent = email;
+        document.getElementById("contact-email").appendChild(emailLink);
+      </script>
     </div>
 
     <footer>
