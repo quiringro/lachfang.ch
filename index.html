@@ -266,6 +266,7 @@
       const el = document.getElementById("email");
       const cards = document.querySelectorAll(".card img");
       let activeOverlay = null;
+      let activeGalleryImages = [];
 
       if (el) {
         el.innerHTML =
@@ -282,6 +283,7 @@
         document.body.classList.remove("image-zoom-open");
         activeOverlay.remove();
         activeOverlay = null;
+        activeGalleryImages = [];
       }
 
       function buildGalleryImages(cardImage) {
@@ -293,26 +295,65 @@
         return [cardImage.src, ...extraImages];
       }
 
+      function updateOverlayImage(overlay, images, imageElement, index) {
+        const clampedIndex = ((index % images.length) + images.length) % images.length;
+        const baseAlt = overlay.dataset.baseAlt || "";
+        imageElement.src = images[clampedIndex];
+        imageElement.alt =
+          clampedIndex === 0 ? baseAlt : baseAlt + " – Zusatzbild " + clampedIndex;
+        overlay.dataset.currentIndex = String(clampedIndex);
+      }
+
       cards.forEach((cardImage) => {
         cardImage.addEventListener("click", () => {
           closeOverlay();
 
+          const images = buildGalleryImages(cardImage);
+          activeGalleryImages = images;
           const overlay = document.createElement("div");
           overlay.className = "image-overlay";
+          overlay.dataset.currentIndex = "0";
+          overlay.dataset.baseAlt = cardImage.alt;
 
-          const gallery = document.createElement("div");
-          gallery.className = "image-overlay__gallery";
+          const zoomedImage = document.createElement("img");
+          zoomedImage.className = "image-overlay__img";
+          updateOverlayImage(overlay, images, zoomedImage, 0);
 
-          buildGalleryImages(cardImage).forEach((imageSrc, index) => {
-            const zoomedImage = document.createElement("img");
-            zoomedImage.src = imageSrc;
-            zoomedImage.alt =
-              index === 0 ? cardImage.alt : cardImage.alt + " – Zusatzbild " + index;
-            zoomedImage.className = "image-overlay__img";
-            gallery.appendChild(zoomedImage);
-          });
+          const imageWrapper = document.createElement("div");
+          imageWrapper.className = "image-overlay__image-wrapper";
+          imageWrapper.appendChild(zoomedImage);
 
-          overlay.appendChild(gallery);
+          overlay.appendChild(imageWrapper);
+
+          if (images.length > 1) {
+            const prevButton = document.createElement("button");
+            prevButton.className = "image-overlay__nav image-overlay__nav--prev";
+            prevButton.type = "button";
+            prevButton.setAttribute("aria-label", "Vorheriges Bild");
+            prevButton.textContent = "‹";
+
+            const nextButton = document.createElement("button");
+            nextButton.className = "image-overlay__nav image-overlay__nav--next";
+            nextButton.type = "button";
+            nextButton.setAttribute("aria-label", "Nächstes Bild");
+            nextButton.textContent = "›";
+
+            prevButton.addEventListener("click", (event) => {
+              event.stopPropagation();
+              const currentIndex = Number(overlay.dataset.currentIndex || "0");
+              updateOverlayImage(overlay, images, zoomedImage, currentIndex - 1);
+            });
+
+            nextButton.addEventListener("click", (event) => {
+              event.stopPropagation();
+              const currentIndex = Number(overlay.dataset.currentIndex || "0");
+              updateOverlayImage(overlay, images, zoomedImage, currentIndex + 1);
+            });
+
+            overlay.appendChild(prevButton);
+            overlay.appendChild(nextButton);
+          }
+
           overlay.addEventListener("click", (event) => {
             if (event.target === overlay) {
               closeOverlay();
@@ -328,6 +369,23 @@
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
           closeOverlay();
+        }
+
+        if (!activeOverlay || activeGalleryImages.length < 2) {
+          return;
+        }
+
+        const zoomedImage = activeOverlay.querySelector(".image-overlay__img");
+        if (!zoomedImage) {
+          return;
+        }
+
+        const currentIndex = Number(activeOverlay.dataset.currentIndex || "0");
+        if (event.key === "ArrowLeft") {
+          updateOverlayImage(activeOverlay, activeGalleryImages, zoomedImage, currentIndex - 1);
+        }
+        if (event.key === "ArrowRight") {
+          updateOverlayImage(activeOverlay, activeGalleryImages, zoomedImage, currentIndex + 1);
         }
       });
     })();
