@@ -198,19 +198,29 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.72);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
   z-index: 1000;
+  overflow-x: auto;
+}
+
+.image-overlay__gallery {
+  margin: 0 auto;
+  max-width: 100%;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  scroll-snap-type: x mandatory;
+  padding: 0 0.75rem;
 }
 
 .image-overlay__img {
   display: block;
-  max-width: min(100vw - 4rem, 100%);
+  flex: 0 0 auto;
+  max-width: min(100vw - 4rem, 900px);
   max-height: calc(100vh - 4rem);
   width: auto;
   height: auto;
   object-fit: contain;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  scroll-snap-align: center;
 }
