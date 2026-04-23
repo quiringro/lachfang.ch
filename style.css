@@ -200,27 +200,66 @@
   background: rgba(0, 0, 0, 0.72);
   padding: 2rem 1rem;
   z-index: 1000;
-  overflow-x: auto;
-}
-
-.image-overlay__gallery {
-  margin: 0 auto;
-  max-width: 100%;
   display: flex;
-  gap: 1.25rem;
   align-items: center;
-  scroll-snap-type: x mandatory;
-  padding: 0 0.75rem;
+  justify-content: center;
 }
 
 .image-overlay__img {
   display: block;
-  flex: 0 0 auto;
-  max-width: min(100vw - 4rem, 900px);
+  max-width: min(100vw - 6rem, 900px);
   max-height: calc(100vh - 4rem);
   width: auto;
   height: auto;
   object-fit: contain;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  scroll-snap-align: center;
+}
+
+.image-overlay__image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.image-overlay__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #222;
+  font-size: 1.8rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.image-overlay__nav:hover {
+  background: #fff;
+}
+
+.image-overlay__nav--prev {
+  left: 1rem;
+}
+
+.image-overlay__nav--next {
+  right: 1rem;
+}
+
+@media (max-width: 600px) {
+  .image-overlay__img {
+    max-width: calc(100vw - 4rem);
+  }
+
+  .image-overlay__nav {
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1.5rem;
+  }
 }
