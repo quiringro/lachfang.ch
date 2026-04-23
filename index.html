@@ -33,7 +33,7 @@
       <h2>üsi designs</h2>
       <div class="cards">
         <div class="card">
-		  <img src="images/Animals/penguin-birthday.png" alt="LACHFANG Penguin">
+		  <img src="images/Animals/penguin-birthday.png" alt="LACHFANG Penguin" data-gallery="images/Animals/penguin-birthday-back.png,images/Animals/penguin-birthday-detail.png">
           <span class="card-label">you had one job</span>
         </div>
         <div class="card">
@@ -284,6 +284,15 @@
         activeOverlay = null;
       }
 
+      function buildGalleryImages(cardImage) {
+        const extraImages = (cardImage.dataset.gallery || "")
+          .split(",")
+          .map((src) => src.trim())
+          .filter(Boolean);
+
+        return [cardImage.src, ...extraImages];
+      }
+
       cards.forEach((cardImage) => {
         cardImage.addEventListener("click", () => {
           closeOverlay();
@@ -291,12 +300,19 @@
           const overlay = document.createElement("div");
           overlay.className = "image-overlay";
 
-          const zoomedImage = document.createElement("img");
-          zoomedImage.src = cardImage.src;
-          zoomedImage.alt = cardImage.alt;
-          zoomedImage.className = "image-overlay__img";
+          const gallery = document.createElement("div");
+          gallery.className = "image-overlay__gallery";
 
-          overlay.appendChild(zoomedImage);
+          buildGalleryImages(cardImage).forEach((imageSrc, index) => {
+            const zoomedImage = document.createElement("img");
+            zoomedImage.src = imageSrc;
+            zoomedImage.alt =
+              index === 0 ? cardImage.alt : cardImage.alt + " – Zusatzbild " + index;
+            zoomedImage.className = "image-overlay__img";
+            gallery.appendChild(zoomedImage);
+          });
+
+          overlay.appendChild(gallery);
           overlay.addEventListener("click", (event) => {
             if (event.target === overlay) {
               closeOverlay();
