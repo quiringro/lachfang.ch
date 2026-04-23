@@ -213,6 +213,8 @@
   height: auto;
   object-fit: contain;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  transform: scale(1.25);
+  transform-origin: center;
 }
 
 .image-overlay__image-wrapper {
